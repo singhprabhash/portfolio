@@ -16,6 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://prabhash-singh.com"),
   title: "Prabhash Singh | Senior Software Engineer",
   description: "Portfolio of Prabhash Singh, a Senior Software Engineer specializing in scalable web applications and distributed systems.",
   keywords: ["Software Engineer", "Full Stack Developer", "React", "Next.js", "System Design", "Web Performance", "Cloud Architecture"],
