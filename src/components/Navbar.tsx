@@ -33,7 +33,7 @@ export default function Navbar() {
         <nav
             className={cn(
                 "fixed top-0 w-full z-50 transition-all duration-500",
-                scrolled ? "bg-background/80 backdrop-blur-sm py-4" : "bg-transparent py-6",
+                scrolled ? "bg-background/80 backdrop-blur-sm py-3 md:py-4" : "bg-transparent py-4 md:py-6",
                 isDevMode ? "font-mono" : "font-sans"
             )}
         >
