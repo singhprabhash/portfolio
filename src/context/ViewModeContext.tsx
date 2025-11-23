@@ -16,10 +16,25 @@ export function ViewModeProvider({ children }: { children: React.ReactNode }) {
     useEffect(() => {
         // Load preference from localStorage on mount
         const savedMode = localStorage.getItem("viewMode");
-        if (savedMode === "client") {
-            setIsDevMode(false);
-        } else if (savedMode === "dev") {
-            setIsDevMode(true);
+
+        // Handle visit counting for auto-reset
+        const visitCount = parseInt(localStorage.getItem("visitCount") || "0");
+
+        if (visitCount >= 4) {
+            // Reset after 4 visits
+            localStorage.removeItem("viewMode");
+            localStorage.removeItem("visitCount");
+            // No savedMode means WelcomeModal will show
+        } else {
+            // Increment visit count
+            localStorage.setItem("visitCount", (visitCount + 1).toString());
+
+            // Restore saved mode if it exists
+            if (savedMode === "client") {
+                setIsDevMode(false);
+            } else if (savedMode === "dev") {
+                setIsDevMode(true);
+            }
         }
     }, []);
 

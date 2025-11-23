@@ -108,14 +108,14 @@ export default function Projects() {
                                             <div className="flex items-center gap-4 text-xs text-muted-foreground font-mono pt-4 border-t border-border">
                                                 <div className="flex items-center gap-1">
                                                     <Star className="w-3 h-3" />
-                                                    <span>{Math.floor(Math.random() * 50) + 10}</span>
+                                                    <span>{(index + 1) * 12 + 4}</span>
                                                 </div>
                                                 <div className="flex items-center gap-1">
                                                     <GitFork className="w-3 h-3" />
-                                                    <span>{Math.floor(Math.random() * 20) + 5}</span>
+                                                    <span>{(index + 1) * 5 + 2}</span>
                                                 </div>
                                                 <div className="ml-auto">
-                                                    Updated {Math.floor(Math.random() * 10) + 1}d ago
+                                                    Updated {(index + 1) * 2}d ago
                                                 </div>
                                             </div>
                                         </div>

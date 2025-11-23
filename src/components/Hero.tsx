@@ -71,7 +71,7 @@ export default function Hero() {
                                             </div>
                                             <div>
                                                 <span className="text-[#9cdcfe]">role</span>:{" "}
-                                                <span className="text-[#ce9178]">'Expert Frontend Engineer'</span>,
+                                                <span className="text-[#ce9178]">'Senior Software Engineer'</span>,
                                             </div>
                                             <div>
                                                 <span className="text-[#9cdcfe]">experience</span>:{" "}
