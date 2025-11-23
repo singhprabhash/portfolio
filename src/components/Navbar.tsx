@@ -6,6 +6,7 @@ import { Menu, X, Code, User } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { useViewMode } from "@/context/ViewModeContext";
+import { Switch } from "@/components/ui/Switch";
 
 const navItems = [
     { name: "Home", href: "#home" },
@@ -57,35 +58,30 @@ export default function Navbar() {
 
                         <div className="h-6 w-px bg-border mx-2" />
 
-                        <button
-                            onClick={toggleViewMode}
-                            className="flex items-center gap-2 text-xs uppercase tracking-widest hover:text-primary transition-colors"
-                        >
-                            {isDevMode ? (
-                                <>
-                                    <Code className="w-4 h-4" />
-                                    <span>Dev</span>
-                                </>
-                            ) : (
-                                <>
-                                    <User className="w-4 h-4" />
-                                    <span>Client</span>
-                                </>
-                            )}
-                        </button>
+                        <div className="flex items-center gap-3">
+                            <span className="text-xs uppercase tracking-widest font-medium">
+                                {isDevMode ? "Dev Mode" : "Recruiter Mode"}
+                            </span>
+                            <Switch
+                                checked={isDevMode}
+                                onCheckedChange={toggleViewMode}
+                            />
+                        </div>
 
 
                     </div>
 
                     {/* Mobile Menu Button */}
                     <div className="md:hidden flex items-center gap-4 z-50">
-                        <button
-                            onClick={toggleViewMode}
-                            className="p-2"
-                            aria-label="Toggle view mode"
-                        >
-                            {isDevMode ? <Code className="w-4 h-4" /> : <User className="w-4 h-4" />}
-                        </button>
+                        <div className="flex items-center gap-2">
+                            <span className="text-[10px] uppercase tracking-widest font-medium">
+                                {isDevMode ? "Dev Mode" : "Recruiter Mode"}
+                            </span>
+                            <Switch
+                                checked={isDevMode}
+                                onCheckedChange={toggleViewMode}
+                            />
+                        </div>
 
                         <button
                             onClick={() => setIsOpen(!isOpen)}
