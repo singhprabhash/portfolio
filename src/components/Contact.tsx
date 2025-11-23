@@ -15,7 +15,7 @@ const contactMethods = [
     {
         name: "LinkedIn",
         value: "linkedin.com/in/prabhash-singh",
-        href: "https://www.linkedin.com/in/prabhash-singh",
+        href: "https://www.linkedin.com/in/prabhash-singh-89bba6157/",
         icon: Linkedin
     },
     {
