@@ -7,11 +7,24 @@ import { cn } from "@/lib/utils";
 
 const experiences = [
     {
+        version: "v4.0.0",
+        role: "Software Engineer II",
+        company: "Essentia Softserv LLP",
+        location: "Noida, India",
+        date: "Sep 2025 - Present",
+        type: "feat",
+        changes: [
+            "Leading development of a scalable SaaS workflow engine for insurance companies using Bun.js, Node.js, Type-Script, React.js, and Redux, enabling automated policy processing, claims handling, and rule-based decision flows",
+            "Architecting micro-frontend components with Redux state management, improving modularity and reducing deployment cycles by 30%.",
+            "Implementing responsive design patterns ensuring seamless UX across mobile, tablet, and desktop browsers with optimized browser rendering performance.",
+        ]
+    },
+    {
         version: "v3.0.0",
         role: "Senior Developer",
         company: "HCLTech Ltd",
         location: "Noida, India",
-        date: "Dec 2023 - Present",
+        date: "Dec 2023 - Aug 2025",
         type: "feat",
         changes: [
             "Built dynamic Excel generation features using ExcelJS/xlsx and React → improved reporting efficiency by 40%.",
