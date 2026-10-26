@@ -1,65 +1,44 @@
 @import "tailwindcss";
 
-@layer base {
-  :root {
-    --background: 210 40% 98%;
-    /* Soft Cool White */
-    --foreground: 222 47% 11%;
-    /* Deep Navy Black */
-    --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
-    --primary: 245 80% 60%;
-    /* Vibrant Indigo */
-    --primary-foreground: 210 40% 98%;
-    --secondary: 245 20% 96%;
-    /* Light Indigo Tint */
-    --secondary-foreground: 222 47% 11%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 245 20% 96%;
-    --accent-foreground: 222 47% 11%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 245 80% 60%;
-    --radius: 0rem;
-    /* Sharp corners */
-  }
-
-  .dark {
-    --background: 0 0% 7%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 7%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 7%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 245 80% 60%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 0 0% 12%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 12%;
-    --muted-foreground: 0 0% 60%;
-    --accent: 0 0% 12%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 12%;
-    --input: 0 0% 12%;
-    --ring: 0 0% 98%;
-  }
+/* Fonts are provided by next/font in layout.tsx as CSS variables. */
+@theme inline {
+  --font-sans: var(--font-jakarta), system-ui, sans-serif;
+  --font-serif: var(--font-playfair), Georgia, serif;
+  --font-handwriting: var(--font-caveat), cursive;
 }
 
-@theme inline {
-  --color-background: hsl(var(--background));
-  --color-foreground: hsl(var(--foreground));
-  --color-primary: hsl(var(--primary));
-  --color-secondary: hsl(var(--secondary));
-  --color-accent: hsl(var(--accent));
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Design tokens ported 1:1 from stitch_editorial_engineer_portfolio_website/code.html */
+@theme {
+  --color-cream-50: #fffcf8;
+  --color-cream-100: #faf6f0;
+  --color-cream-200: #f5efe6;
+  --color-cream-300: #ede4d8;
+  --color-cream-surface: #fef9f1;
+
+  --color-pastel-peach: #fce5d7;
+  --color-pastel-peachLight: #fff2eb;
+  --color-pastel-mint: #ddefe2;
+  --color-pastel-mintLight: #f0f8f3;
+  --color-pastel-blue: #dfecfa;
+  --color-pastel-blueLight: #f0f6fd;
+  --color-pastel-blush: #f4e5e8;
+  --color-pastel-blushLight: #fdf2f4;
+  --color-pastel-yellow: #f6e7b4;
+
+  --color-ink-900: #171923;
+  --color-ink-800: #2a2927;
+  --color-ink-700: #4a4843;
+  --color-ink-500: #5a5962;
+  --color-ink-400: #8e8d94;
+
+  --color-terracotta: #d96b43;
+  --color-terracotta-deep: #b8532f;
+
+  --radius-card: 1.5rem;
+
+  --shadow-soft:
+    0 8px 24px -6px rgb(23 25 35 / 0.05), 0 2px 6px -2px rgb(23 25 35 / 0.03);
+  --shadow-float: 0 16px 32px -10px rgb(23 25 35 / 0.08);
 }
 
 html {
@@ -67,95 +46,173 @@ html {
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+  background-color: #fef9f1;
+  color: #171923;
+  font-family: var(--font-jakarta), system-ui, sans-serif;
 }
 
-::-webkit-scrollbar {
-  width: 8px;
+::selection {
+  background-color: #fce5d7;
+  color: #171923;
 }
 
-::-webkit-scrollbar-track {
-  background: var(--background);
+.badge-dot {
+  animation: pulse-dot 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
-::-webkit-scrollbar-thumb {
-  background: var(--primary);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--secondary);
-}
-
-@layer utilities {
-  .glass {
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(16px);
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
-  }
-
-  .dark .glass {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  }
-
-  .text-gradient {
-    background: linear-gradient(to right, hsl(var(--primary)), hsl(var(--foreground)), hsl(var(--primary)));
-    background-size: 200% auto;
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: gradient 5s linear infinite;
-  }
-
-  .animate-blob {
-    animation: blob 7s infinite;
-  }
-
-  .animation-delay-2000 {
-    animation-delay: 2s;
-  }
-
-  .animation-delay-4000 {
-    animation-delay: 4s;
-  }
-}
-
-@keyframes blob {
-  0% {
-    transform: translate(0px, 0px) scale(1);
-  }
-
-  33% {
-    transform: translate(30px, -50px) scale(1.1);
-  }
-
-  66% {
-    transform: translate(-20px, 20px) scale(0.9);
-  }
-
+@keyframes pulse-dot {
+  0%,
   100% {
-    transform: translate(0px, 0px) scale(1);
+    opacity: 1;
+    transform: scale(1);
   }
-}
-
-@keyframes gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-
   50% {
-    background-position: 100% 50%;
+    opacity: 0.45;
+    transform: scale(1.2);
   }
+}
 
-  100% {
-    background-position: 0% 50%;
+/* Touch target guarantee */
+@utility touch-target {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/*
+ * Tailwind v3 "forms" plugin parity (code.html loads ?plugins=forms):
+ * resets native control chrome so the utility classes on inputs render identically.
+ */
+@layer base {
+  input:where([type="text"], [type="email"]),
+  select,
+  textarea {
+    appearance: none;
+    background-color: #fff;
+    border-width: 1px;
+    border-radius: 0;
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+}
+
+/*
+ * Typographic scale (fluid). Use these instead of ad-hoc text-* sizes for headings and body.
+ */
+@utility type-hero {
+  font-family: var(--font-playfair), Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(2.5rem, 1.2rem + 3.8vw, 4.25rem);
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+@utility type-section {
+  font-family: var(--font-playfair), Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(2.125rem, 1.6rem + 2vw, 3rem);
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+@utility type-title {
+  font-family: var(--font-playfair), Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(1.375rem, 1.2rem + 0.7vw, 1.75rem);
+  line-height: 1.2;
+}
+@utility type-lead {
+  font-size: clamp(1.125rem, 1.05rem + 0.3vw, 1.3125rem);
+  line-height: 1.6;
+}
+@utility type-body {
+  font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  line-height: 1.65;
+}
+@utility type-small {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+@utility type-label {
+  font-size: 0.8125rem;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+@utility section-y {
+  padding-block: clamp(2.5rem, 1.5rem + 3vw, 4rem);
+}
+
+/* Buttons, shared across the site. */
+@utility btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 48px;
+  padding: 0 1.5rem;
+  border-radius: 9999px;
+  background-color: #171923;
+  color: #fffcf8;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1;
+  transition:
+    background-color 200ms ease,
+    box-shadow 200ms ease,
+    transform 200ms ease;
+  &:hover {
+    background-color: #000;
+    box-shadow: 0 8px 20px -8px rgb(23 25 35 / 0.45);
+  }
+  &:active {
+    transform: translateY(1px);
+  }
+}
+@utility btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 48px;
+  padding: 0 1.5rem;
+  border-radius: 9999px;
+  border: 1px solid rgb(23 25 35 / 0.28);
+  background-color: rgb(255 255 255 / 0.7);
+  color: #171923;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1;
+  transition:
+    background-color 200ms ease,
+    border-color 200ms ease,
+    transform 200ms ease;
+  &:hover {
+    background-color: #fff;
+    border-color: #171923;
+  }
+  &:active {
+    transform: translateY(1px);
+  }
+}
+
+/* Visible keyboard focus everywhere. */
+:focus-visible {
+  outline: 2px solid #d96b43;
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* Respect reduced-motion preferences. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

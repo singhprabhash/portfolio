@@ -1,138 +1,118 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { Menu, X, Code, User } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
-import { cn } from "@/lib/utils";
-import { useViewMode } from "@/context/ViewModeContext";
-import { Switch } from "@/components/ui/Switch";
-
-const navItems = [
-    { name: "Home", href: "#home" },
-    { name: "Work", href: "#projects" },
-    { name: "About", href: "#experience" },
-    { name: "Contact", href: "#contact" },
-];
+import { navLinks } from "@/data/nav";
 
 export default function Navbar() {
-    const [isOpen, setIsOpen] = useState(false);
-    const [scrolled, setScrolled] = useState(false);
-    const [mounted, setMounted] = useState(false);
-    const { isDevMode, toggleViewMode } = useViewMode();
+  const [open, setOpen] = useState(false);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
-    useEffect(() => {
-        setMounted(true);
-        const handleScroll = () => {
-            setScrolled(window.scrollY > 50);
-        };
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
+  // Close on Escape and return focus to the toggle.
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setOpen(false);
+        buttonRef.current?.focus();
+      }
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [open]);
 
-    // Prevent body scroll when mobile menu is open
-    useEffect(() => {
-        if (isOpen) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = '';
-        }
-        return () => {
-            document.body.style.overflow = '';
-        };
-    }, [isOpen]);
-
-    return (
-        <nav
-            className={cn(
-                "fixed top-0 w-full z-50 transition-all duration-500",
-                scrolled ? "bg-background/80 backdrop-blur-sm py-3 md:py-4" : "bg-transparent py-4 md:py-6",
-                isDevMode ? "font-mono" : "font-sans"
-            )}
+  return (
+    <header className="sticky top-0 z-50 bg-[#FEF9F1]/90 backdrop-blur-md transition-all duration-300 border-b border-black/[0.04]">
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 h-16 sm:h-20 flex items-center justify-between">
+        {/* Brand Wordmark */}
+        <Link
+          href="#hero"
+          className="group text-2xl font-bold tracking-tight text-ink-900 font-serif flex items-center gap-1 touch-target py-2"
         >
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex items-center justify-between">
-                    <Link href="#home" className={cn("text-xl font-bold tracking-tight z-50", !isDevMode && "font-serif")}>
-                        {isDevMode ? "<PS />" : "PS."}
-                    </Link>
+          <span>Prabhash</span>
+          <span
+            aria-hidden="true"
+            className="w-2 h-2 rounded-full bg-[#D96B43] inline-block group-hover:scale-125 transition-transform duration-300"
+          />
+        </Link>
 
-                    {/* Desktop Menu */}
-                    <div className="hidden md:flex items-center gap-8">
-                        {navItems.map((item) => (
-                            <Link
-                                key={item.name}
-                                href={item.href}
-                                className="text-sm uppercase tracking-widest hover:text-muted-foreground transition-colors"
-                            >
-                                {item.name}
-                            </Link>
-                        ))}
-
-                        <div className="h-6 w-px bg-border mx-2" />
-
-                        <div className="flex items-center gap-3">
-                            <span className="text-xs uppercase tracking-widest font-medium">
-                                {isDevMode ? "Dev Mode" : "Recruiter Mode"}
-                            </span>
-                            <Switch
-                                checked={isDevMode}
-                                onCheckedChange={toggleViewMode}
-                            />
-                        </div>
-
-
-                    </div>
-
-                    {/* Mobile Menu Button */}
-                    <div className="md:hidden flex items-center gap-4 z-50">
-                        <div className="flex items-center gap-2">
-                            <span className="text-[10px] uppercase tracking-widest font-medium">
-                                {isDevMode ? "Dev Mode" : "Recruiter Mode"}
-                            </span>
-                            <Switch
-                                checked={isDevMode}
-                                onCheckedChange={toggleViewMode}
-                            />
-                        </div>
-
-                        <button
-                            onClick={() => setIsOpen(!isOpen)}
-                            className="p-2"
-                            aria-label="Toggle menu"
-                        >
-                            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            {/* Mobile Menu Overlay */}
-            <AnimatePresence>
-                {isOpen && (
-                    <motion.div
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
-                        className="fixed top-0 left-0 right-0 bottom-0 h-screen w-screen bg-background z-40 flex flex-col items-center justify-center md:hidden"
-                    >
-                        <div className="flex flex-col items-center gap-8">
-                            {navItems.map((item) => (
-                                <Link
-                                    key={item.name}
-                                    href={item.href}
-                                    onClick={() => setIsOpen(false)}
-                                    className={cn(
-                                        "text-2xl font-medium hover:text-muted-foreground transition-colors",
-                                        !isDevMode && "font-serif"
-                                    )}
-                                >
-                                    {item.name}
-                                </Link>
-                            ))}
-                        </div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
+        {/* Desktop Navigation Links */}
+        <nav
+          aria-label="Main Navigation"
+          className="hidden md:flex items-center space-x-1 sm:space-x-2 text-sm font-medium text-ink-700"
+        >
+          {navLinks.map((link) => (
+            <Link
+              key={link.name}
+              href={link.href}
+              className="px-4 py-2 rounded-full hover:text-ink-900 hover:bg-black/[0.04] transition-colors"
+            >
+              {link.name}
+            </Link>
+          ))}
         </nav>
-    );
+
+        <div className="flex items-center gap-3">
+          <Link
+            href="#contact"
+            className="btn-primary min-h-[44px]! px-4! sm:px-5! text-[13px]!"
+          >
+            <span>Let&apos;s Talk</span>
+            <span aria-hidden="true" className="text-xs">
+              ↗
+            </span>
+          </Link>
+
+          {/* Mobile menu toggle */}
+          <button
+            ref={buttonRef}
+            type="button"
+            aria-expanded={open}
+            aria-controls="mobile-menu"
+            aria-label={open ? "Close menu" : "Open menu"}
+            onClick={() => setOpen((v) => !v)}
+            className="md:hidden touch-target inline-flex items-center justify-center rounded-full border border-black/10 bg-white/90 text-ink-900"
+          >
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              {open ? (
+                <path d="M6 6l12 12M18 6L6 18" />
+              ) : (
+                <path d="M4 7h16M4 12h16M4 17h16" />
+              )}
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile menu panel */}
+      <nav
+        id="mobile-menu"
+        aria-label="Mobile Navigation"
+        hidden={!open}
+        className="md:hidden border-t border-black/[0.04] bg-[#FEF9F1]"
+      >
+        <ul className="max-w-7xl mx-auto px-5 sm:px-8 py-3">
+          {navLinks.map((link) => (
+            <li key={link.name}>
+              <Link
+                href={link.href}
+                onClick={() => setOpen(false)}
+                className="flex items-center min-h-[48px] text-base font-medium text-ink-800 border-b border-black/[0.05] last:border-b-0"
+              >
+                {link.name}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </header>
+  );
 }

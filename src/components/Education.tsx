@@ -1,57 +1,23 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { GraduationCap, Award } from "lucide-react";
+import { education } from "@/data/profile";
 
 export default function Education() {
-    return (
-        <section className="py-20 bg-background/50">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-                    {/* Education */}
-                    <motion.div
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5 }}
-                    >
-                        <h2 className="text-3xl font-bold mb-8 flex items-center gap-3">
-                            <GraduationCap className="text-primary" />
-                            Education
-                        </h2>
-
-                        <div className="glass p-6 rounded-2xl border-l-4 border-l-primary">
-                            <h3 className="text-xl font-bold">B.Tech — Computer Science & Engineering</h3>
-                            <p className="text-gray-300 mt-1">Meerut Institute of Engineering and Technology</p>
-                            <p className="text-sm text-gray-400 mt-2">2015 – 2019</p>
-                        </div>
-                    </motion.div>
-
-                    {/* Soft Skills */}
-                    <motion.div
-                        initial={{ opacity: 0, x: 20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5 }}
-                    >
-                        <h2 className="text-3xl font-bold mb-8 flex items-center gap-3">
-                            <Award className="text-secondary" />
-                            Soft Skills
-                        </h2>
-
-                        <div className="grid grid-cols-2 gap-4">
-                            {["Leadership", "Communication", "Team Collaboration", "Problem Solving"].map((skill, index) => (
-                                <div
-                                    key={index}
-                                    className="glass p-4 rounded-xl text-center hover:bg-white/5 transition-colors"
-                                >
-                                    <span className="font-medium text-gray-200">{skill}</span>
-                                </div>
-                            ))}
-                        </div>
-                    </motion.div>
-                </div>
-            </div>
-        </section>
-    );
+  return (
+    <section id="education" aria-labelledby="education-heading" className="border-t border-ink-900/10 py-12 sm:py-16">
+      <div className="mx-auto max-w-7xl px-5 sm:px-8">
+        <div className="grid gap-x-12 gap-y-3 md:grid-cols-[16rem_1fr]">
+          <h2 id="education-heading" className="type-label text-terracotta-deep md:pt-2 md:text-right md:pr-4">
+            Education
+          </h2>
+          <div className="md:pl-10">
+            <p className="type-title text-ink-900">{education.degree}</p>
+            <p className="type-body mt-2 text-ink-800">
+              {education.major}
+              <span className="text-ink-500"> · {education.institution}</span>
+            </p>
+            <p className="mt-1 text-[0.9375rem] text-ink-500">{education.period}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 }
