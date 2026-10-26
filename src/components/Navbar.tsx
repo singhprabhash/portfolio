@@ -39,13 +39,13 @@ export default function Navbar() {
         {/* Desktop Navigation Links */}
         <nav
           aria-label="Main Navigation"
-          className="hidden md:flex items-center space-x-1 sm:space-x-2 text-sm font-medium text-ink-700"
+          className="hidden md:flex items-center space-x-0 lg:space-x-2 text-sm font-medium text-ink-700"
         >
           {navLinks.map((link) => (
             <Link
               key={link.name}
               href={link.href}
-              className="px-4 py-2 rounded-full hover:text-ink-900 hover:bg-black/[0.04] transition-colors"
+              className="px-2.5 lg:px-4 py-2 rounded-full hover:text-ink-900 hover:bg-black/[0.04] transition-colors"
             >
               {link.name}
             </Link>
@@ -55,7 +55,7 @@ export default function Navbar() {
         <div className="flex items-center gap-3">
           <Link
             href="#contact"
-            className="btn-primary min-h-[44px]! px-4! sm:px-5! text-[13px]!"
+            className="btn-primary whitespace-nowrap min-h-[44px]! px-4! sm:px-5! text-[13px]!"
           >
             <span>Let&apos;s Talk</span>
             <span aria-hidden="true" className="text-xs">

@@ -4,8 +4,8 @@ export const profile = {
   yearsOfExperience: 7,
   location: "Noida, India",
   email: "prabhash6615@gmail.com",
-  linkedinUrl: "https://linkedin.com/in/prabhash-singh",
-  linkedinLabel: "linkedin.com/in/prabhash-singh",
+  linkedinUrl: "https://www.linkedin.com/in/prabhash-singh-89bba6157/",
+  linkedinLabel: "linkedin.com/in/prabhash-singh-89bba6157",
   /**
    * Public path of the downloadable resume (e.g. "/assets/Prabhash_Singh_Resume.pdf").
    * Leave undefined to hide the "Download Resume" button until a file is published.

@@ -70,11 +70,6 @@ export const metadata: Metadata = {
     creator: "@prabhash_singh",
     images: ["/img/og-image.jpg"],
   },
-  icons: {
-    icon: "/logo.svg",
-    shortcut: "/logo.svg",
-    apple: "/logo.svg",
-  },
 };
 
 export default function RootLayout({

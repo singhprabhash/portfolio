@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { navLinks } from "@/data/nav";
+import { profile } from "@/data/profile";
 
 export default function Footer() {
   return (
@@ -30,7 +31,7 @@ export default function Footer() {
           {/* Social Quick Connect */}
           <div className="flex items-center gap-3 text-xs font-bold text-ink-800 uppercase tracking-wider">
             <a
-              href="https://linkedin.com/in/prabhash-singh"
+              href={profile.linkedinUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-[#D96B43] transition-colors py-2"
